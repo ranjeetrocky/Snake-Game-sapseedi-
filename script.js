@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Track the current food emoji to avoid repeating
     let currentFoodIndex = -1;
 
+    // Track game state for button behavior
+    let isGameOverState = false;
+
     // Game state
     let gameState = {
         snake: [{ x: 10, y: 10 }], // Start with head only
@@ -67,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gameBoard.style.height = `${config.boardSize * config.cellSize}px`;
 
     // Event listeners
-    startButton.addEventListener("click", startGame);
+    startButton.addEventListener("click", handleStartButtonClick);
     document.addEventListener("keydown", handleKeyPress);
 
     // Initialize empty arrays for snake segments and food element
@@ -121,6 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Start/Restart button handler
+    function handleStartButtonClick() {
+        if (isGameOverState) {
+            // If game is over, reload the page
+            window.location.reload();
+        } else {
+            // Otherwise start a new game
+            startGame();
+        }
+    }
+
     // Start a new game
     function startGame() {
         // Reset game state
@@ -137,6 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
             updateInterval: 1000 / config.fps,
             moveAccumulator: 0,
         };
+
+        // Reset game over state
+        isGameOverState = false;
 
         // Clear game board
         gameBoard.innerHTML = "";
@@ -788,6 +805,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Show game over state
     function showGameOver() {
+        // Set game over flag for button behavior
+        isGameOverState = true;
+
+        // Update button text
         startButton.textContent = "Play Again";
 
         // Cancel any running animation frame
