@@ -11,6 +11,11 @@
 
 <body>
     <div class="game-container">
+        <div class="header-controls">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
         <h1>AI generated Snake Game</h1>
         <div class="score-container">Score: <span id="score">0</span></div>
         <div class="game-board" id="game-board"></div>
@@ -30,6 +35,35 @@
     <script>
         // Set current year for copyright
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Dark mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Apply theme
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Update icon
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
     </script>
 </body>
 

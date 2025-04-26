@@ -5,72 +5,158 @@
     font-family: 'Arial', sans-serif;
 }
 
+:root {
+    --bg-color: #f5f7fa;
+    --container-bg: #ffffff;
+    --text-color: #474747;
+    --heading-color: #7986cb;
+    --score-color: #5c6bc0;
+    --game-board-bg: #f0f4f8;
+    --game-board-border: #e8eaf6;
+    --snake-color: #7986cb;
+    --snake-head-color: #5c6bc0;
+    --snake-pattern-color: #9fa8da;
+    --button-color: #7986cb;
+    --button-hover: #5c6bc0;
+    --footer-text: #757575;
+    --footer-border: #e8eaf6;
+    --link-color: #5c6bc0;
+    --link-hover: #3f51b5;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --shadow-hover: rgba(0, 0, 0, 0.1);
+    --toggle-bg: #f0f4f8;
+    --toggle-icon: #5c6bc0;
+}
+
+.dark-mode {
+    --bg-color: #1a1a2e;
+    --container-bg: #16213e;
+    --text-color: #e6e6e6;
+    --heading-color: #a5b4fc;
+    --score-color: #818cf8;
+    --game-board-bg: #0f172a;
+    --game-board-border: #1e293b;
+    --snake-color: #818cf8;
+    --snake-head-color: #a5b4fc;
+    --snake-pattern-color: #c7d2fe;
+    --button-color: #818cf8;
+    --button-hover: #a5b4fc;
+    --footer-text: #94a3b8;
+    --footer-border: #1e293b;
+    --link-color: #818cf8;
+    --link-hover: #a5b4fc;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --shadow-hover: rgba(0, 0, 0, 0.3);
+    --toggle-bg: #0f172a;
+    --toggle-icon: #f1f5f9;
+}
+
 body {
-    background-color: #f5f7fa;
+    background-color: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: #474747;
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
 }
 
 .game-container {
     text-align: center;
-    background-color: #ffffff;
+    background-color: var(--container-bg);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px var(--shadow-color);
     max-width: 600px;
     width: 95%;
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+}
+
+.theme-toggle {
+    background-color: var(--toggle-bg);
+    color: var(--toggle-icon);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-hover);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
 }
 
 h1 {
     margin-bottom: 1.5rem;
-    color: #7986cb;
+    color: var(--heading-color);
     font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 .score-container {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #5c6bc0;
+    color: var(--score-color);
+    transition: color 0.3s ease;
 }
 
 .game-board {
-    background-color: #f0f4f8;
+    background-color: var(--game-board-bg);
     border-radius: 8px;
     width: 400px;
     height: 400px;
     margin: 0 auto 1.5rem;
     position: relative;
-    border: 2px solid #e8eaf6;
+    border: 2px solid var(--game-board-border);
     overflow: hidden;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .snake-segment {
     position: absolute;
-    background-color: #7986cb;
+    background-color: var(--snake-color);
     border-radius: 3px;
     width: 18px;
     height: 18px;
     z-index: 10;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 .snake-body-connector {
     position: absolute;
-    background-color: #7986cb;
+    background-color: var(--snake-color);
     width: 18px;
     height: 18px;
     z-index: 9;
+    transition: background-color 0.3s ease;
 }
 
 .snake-head {
-    background-color: #5c6bc0;
+    background-color: var(--snake-head-color);
     border-radius: 6px;
     width: 20px;
     height: 20px;
     z-index: 11;
+    transition: background-color 0.3s ease;
 }
 
 .snake-eye {
@@ -94,7 +180,7 @@ h1 {
 
 .snake-pattern {
     position: absolute;
-    background-color: #9fa8da;
+    background-color: var(--snake-pattern-color);
     width: 4px;
     height: 4px;
     border-radius: 50%;
@@ -102,6 +188,7 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 11;
+    transition: background-color 0.3s ease;
 }
 
 .food {
@@ -123,7 +210,7 @@ h1 {
 }
 
 button {
-    background-color: #7986cb;
+    background-color: var(--button-color);
     color: white;
     border: none;
     padding: 0.8rem 1.5rem;
@@ -134,27 +221,29 @@ button {
 }
 
 button:hover {
-    background-color: #5c6bc0;
+    background-color: var(--button-hover);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px var(--shadow-hover);
 }
 
 .instructions {
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #757575;
+    color: var(--footer-text);
+    transition: color 0.3s ease;
 }
 
 .footer {
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 1px solid #e8eaf6;
+    border-top: 1px solid var(--footer-border);
     font-size: 0.85rem;
-    color: #757575;
+    color: var(--footer-text);
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer a {
-    color: #5c6bc0;
+    color: var(--link-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -164,7 +253,7 @@ button:hover {
 }
 
 .footer a:hover {
-    color: #3f51b5;
+    color: var(--link-hover);
     text-decoration: underline;
 }
 
