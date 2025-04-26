@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Generated Soothing Snake Game</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -19,10 +20,17 @@
                 <p>Use arrow keys to control the snake</p>
             </div>
         </div>
+        <footer class="footer">
+            <p>&copy; <span id="currentYear"></span> Manan Domadiya - <a href="https://github.com/ranjeetrocky" target="_blank"><i class="fab fa-github"></i> GitHub</a></p>
+        </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Set current year for copyright
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>
