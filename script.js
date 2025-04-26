@@ -386,14 +386,39 @@ document.addEventListener("DOMContentLoaded", () => {
             ease: "elastic.out(1, 0.3)",
         });
 
-        // Pulsing animation
-        gsap.to(foodElement, {
-            scale: 1.2,
-            duration: 0.8,
-            yoyo: true,
-            repeat: -1,
-            ease: "sine.inOut",
-        });
+        // Apply smooth 60fps animation using requestAnimationFrame instead of GSAP timeline
+        // This provides better performance and smoother animations
+        let startTime;
+        let animationFrameId;
+        const animationDuration = 1500; // 1.5 seconds for a complete cycle
+        const animateFood = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+
+            // Calculate the scale based on a sine wave for smooth transitions
+            // Using cubic bezier-like curve for more natural movement
+            const progress = (elapsed % animationDuration) / animationDuration;
+            const curve =
+                progress < 0.5
+                    ? 4 * Math.pow(progress, 3)
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+            const scale = 1 + 0.15 * Math.sin(curve * Math.PI * 2);
+
+            // Apply scale with GPU acceleration for smoother animation
+            foodElement.style.transform = `scale(${scale})`;
+
+            // Stop animation if the food element is no longer in the DOM
+            if (!foodElement.isConnected) {
+                cancelAnimationFrame(animationFrameId);
+                return;
+            }
+
+            animationFrameId = requestAnimationFrame(animateFood);
+        };
+
+        // Start the animation
+        animationFrameId = requestAnimationFrame(animateFood);
     }
 
     // Update snake visual elements to match game state
