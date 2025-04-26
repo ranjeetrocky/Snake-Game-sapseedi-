@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #474747;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    width: 95%;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    color: #7986cb;
+    font-weight: 600;
+}
+
+.score-container {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #5c6bc0;
+}
+
+.game-board {
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    border: 2px solid #e8eaf6;
+    overflow: hidden;
+}
+
+.snake-segment {
+    position: absolute;
+    background-color: #7986cb;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+}
+
+.snake-head {
+    background-color: #5c6bc0;
+}
+
+.food {
+    position: absolute;
+    background-color: #ff8a80;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    z-index: 5;
+}
+
+.controls {
+    margin-top: 1rem;
+}
+
+button {
+    background-color: #7986cb;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #5c6bc0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.instructions {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #757575;
+}
+
+@media (max-width: 500px) {
+    .game-board {
+        width: 300px;
+        height: 300px;
+    }
+}
