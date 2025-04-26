@@ -9,12 +9,34 @@ document.addEventListener("DOMContentLoaded", () => {
         fps: 60, // Target FPS
     };
 
+    // Array of food options (emojis of animals that snakes eat)
+    const foodEmojis = [
+        { emoji: "🐁", name: "mouse" },
+        { emoji: "🐀", name: "rat" },
+        { emoji: "🐇", name: "rabbit" },
+        { emoji: "🐸", name: "frog" },
+        { emoji: "🦎", name: "lizard" },
+        { emoji: "🐦", name: "bird" },
+        { emoji: "🐣", name: "chick" },
+        { emoji: "🦗", name: "cricket" },
+        { emoji: "🐞", name: "beetle" },
+        { emoji: "🦟", name: "mosquito" },
+        { emoji: "🕷️", name: "spider" },
+        { emoji: "🐜", name: "ant" },
+        { emoji: "🐌", name: "snail" },
+        { emoji: "🦔", name: "hedgehog" },
+        { emoji: "🐹", name: "hamster" },
+    ];
+
+    // Track the current food emoji to avoid repeating
+    let currentFoodIndex = -1;
+
     // Game state
     let gameState = {
         snake: [{ x: 10, y: 10 }], // Start with head only
         direction: "right",
         nextDirection: "right",
-        food: { x: 15, y: 10 },
+        food: { x: 15, y: 10, type: getNextFoodType() },
         score: 0,
         gameOver: false,
         paused: true,
@@ -23,6 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
         updateInterval: 1000 / config.fps, // Time between animation frames
         moveAccumulator: 0, // Accumulator for movement timing
     };
+
+    // Get next food type, avoiding repetition
+    function getNextFoodType() {
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * foodEmojis.length);
+        } while (newIndex === currentFoodIndex && foodEmojis.length > 1);
+
+        currentFoodIndex = newIndex;
+        return foodEmojis[newIndex];
+    }
 
     // DOM Elements
     const gameBoard = document.getElementById("game-board");
@@ -314,6 +347,18 @@ document.addEventListener("DOMContentLoaded", () => {
         foodElement.className = "food";
         foodElement.style.left = `${gameState.food.x * config.cellSize}px`;
         foodElement.style.top = `${gameState.food.y * config.cellSize}px`;
+
+        // Add emoji to display food type
+        foodElement.textContent = gameState.food.type.emoji;
+        foodElement.setAttribute("aria-label", gameState.food.type.name);
+        foodElement.title = gameState.food.type.name;
+
+        // Style for emoji display
+        foodElement.style.display = "flex";
+        foodElement.style.justifyContent = "center";
+        foodElement.style.alignItems = "center";
+        foodElement.style.fontSize = "14px";
+        foodElement.style.textAlign = "center";
 
         gameBoard.appendChild(foodElement);
 
@@ -714,6 +759,7 @@ document.addEventListener("DOMContentLoaded", () => {
             position = {
                 x: Math.floor(Math.random() * config.boardSize),
                 y: Math.floor(Math.random() * config.boardSize),
+                type: getNextFoodType(),
             };
 
             // Check if position overlaps with snake

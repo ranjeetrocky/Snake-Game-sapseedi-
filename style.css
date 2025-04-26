@@ -106,11 +106,16 @@ h1 {
 
 .food {
     position: absolute;
-    background-color: #ff8a80;
-    border-radius: 50%;
+    background-color: transparent;
     width: 18px;
     height: 18px;
     z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+    line-height: 1;
 }
 
 .controls {
