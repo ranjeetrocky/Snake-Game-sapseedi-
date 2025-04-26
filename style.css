@@ -50,22 +50,66 @@ h1 {
 .snake-segment {
     position: absolute;
     background-color: #7986cb;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    border-radius: 3px;
+    width: 18px;
+    height: 18px;
     z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.snake-body-connector {
+    position: absolute;
+    background-color: #7986cb;
+    width: 18px;
+    height: 18px;
+    z-index: 9;
 }
 
 .snake-head {
     background-color: #5c6bc0;
+    border-radius: 6px;
+    width: 20px;
+    height: 20px;
+    z-index: 11;
+}
+
+.snake-eye {
+    position: absolute;
+    background-color: white;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    z-index: 12;
+}
+
+.snake-eye-right {
+    right: 4px;
+    top: 4px;
+}
+
+.snake-eye-left {
+    right: 4px;
+    top: 13px;
+}
+
+.snake-pattern {
+    position: absolute;
+    background-color: #9fa8da;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
 }
 
 .food {
     position: absolute;
     background-color: #ff8a80;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     z-index: 5;
 }
 
